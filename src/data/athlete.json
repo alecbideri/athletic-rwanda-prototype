@@ -1,0 +1,24 @@
+{
+  "id": "RW-UG20-0482",
+  "name": "Eric M.",
+  "club": "AS Kigali",
+  "sport": "Football",
+  "competitionLevel": "U20",
+  "position": "Right-back",
+  "eligibility": "Cleared",
+  "medicalStatus": "Monitoring",
+  "readiness": 82,
+  "currentForm": 8.2,
+  "minutesPlayed": 384,
+  "topSpeed": 28.4,
+  "recovery": 82,
+  "matchLoad": 72,
+  "risk": "Low",
+  "nextAppointment": "21 May 2026",
+  "health": {
+    "sleep": "7h 42m",
+    "energy": "7 / 10",
+    "bodyPart": "Right knee",
+    "bodyPartStatus": "Monitoring"
+  }
+}

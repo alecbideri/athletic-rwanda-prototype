@@ -1,0 +1,6 @@
+[
+  { "name": "FERWAFA", "sport": "Football", "phase": "Phase 2", "coverage": 92, "status": "On track" },
+  { "name": "Rwanda Athletics", "sport": "Track & field", "phase": "Phase 2", "coverage": 74, "status": "On track" },
+  { "name": "Rwanda Volleyball", "sport": "Indoor sport", "phase": "Phase 1", "coverage": 58, "status": "On track" },
+  { "name": "Basketball Rwanda", "sport": "Team sport", "phase": "Phase 1", "coverage": 41, "status": "Needs onboarding" }
+]

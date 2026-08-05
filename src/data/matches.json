@@ -1,0 +1,37 @@
+[
+  {
+    "id": "match-2026-05-17",
+    "home": "AS Kigali",
+    "away": "Rayon Sports",
+    "result": "W 2–1",
+    "date": "17 May 2026",
+    "status": "Selected",
+    "processing": "Complete",
+    "possession": "54%",
+    "highIntensityRuns": "48",
+    "pressRecoveries": "23",
+    "insights": [
+      { "title": "Right-side overload", "detail": "AS Kigali created 38% of progressive actions through Eric's side in the second half.", "action": "Protect the channel late in matches" },
+      { "title": "Recovery window", "detail": "Eric's high-intensity output stayed within his established five-match range.", "action": "Keep normal recovery plan" },
+      { "title": "Press trigger", "detail": "The team recovered possession 23 times within 6 seconds of losing the ball.", "action": "Repeat the second-half press cue" }
+    ]
+  },
+  {
+    "id": "match-2026-05-10",
+    "home": "AS Kigali",
+    "away": "APR FC",
+    "result": "D 1–1",
+    "date": "10 May 2026",
+    "status": "Processed",
+    "processing": "Complete"
+  },
+  {
+    "id": "match-2026-05-03",
+    "home": "AS Kigali",
+    "away": "Police FC",
+    "result": "W 3–0",
+    "date": "03 May 2026",
+    "status": "Processed",
+    "processing": "Complete"
+  }
+]
