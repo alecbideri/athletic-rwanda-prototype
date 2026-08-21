@@ -1,0 +1,119 @@
+{
+  "school": "St Joseph Kabgayi",
+  "centre": "Isonga Centre at St Joseph Kabgayi",
+  "coach": {
+    "name": "S. Habimana",
+    "role": "Football coach & safeguarding",
+    "discipline": "Football",
+    "disciplines": "Isonga covers football, athletics, basketball, swimming, tennis and more — this view is the football group at St Joseph Kabgayi"
+  },
+  "nextSession": "Tuesday training · 16:00 · Isonga Centre pitch · 24 students in the group",
+  "sessionStatus": "Planned",
+  "kpis": [
+    { "label": "Ready to train", "value": "18", "detail": "75% of group", "tone": "mint" },
+    { "label": "Monitor load", "value": "4", "detail": "Needs adjustment", "tone": "coral" },
+    { "label": "Rest", "value": "2", "detail": "Reviewed by staff", "tone": "violet" },
+    { "label": "Training load", "value": "72%", "detail": "Group average", "tone": "neutral" }
+  ],
+  "insights": [
+    { "title": "Today's focus", "detail": "Reduce high-intensity volume for the four students in the monitoring group.", "action": "Open load view", "tone": "coral" },
+    { "title": "Development signal", "detail": "Ishimwe Eric is 62% through Train to Train and trending upward across his last five evaluations.", "action": "Open student", "tone": "mint" },
+    { "title": "Last evaluation", "detail": "St Joseph Kabgayi 2 · Isonga inter-school 1 · 90 minutes of record available.", "action": "Review evaluation", "tone": "violet" }
+  ],
+  "groups": [
+    { "label": "Ready to train", "count": "18", "detail": "Normal session plan", "tone": "mint" },
+    { "label": "Monitor load", "count": "4", "detail": "Adjust high-intensity work", "tone": "coral" },
+    { "label": "Rest", "count": "2", "detail": "Await staff review", "tone": "violet" }
+  ],
+  "students": [
+    { "name": "Ishimwe Eric", "position": "Right-back", "load": "72%", "readiness": "Ready", "action": "Train" },
+    { "name": "Niyonzima F.", "position": "Midfielder", "load": "91%", "readiness": "Monitor", "action": "Reduce load" },
+    { "name": "Uwase A.", "position": "Forward", "load": "84%", "readiness": "Ready", "action": "Train" },
+    { "name": "Patrick K.", "position": "Goalkeeper", "load": "—", "readiness": "Rest", "action": "Review" }
+  ],
+  "progression": {
+    "eyebrow": "PROGRESSION REVIEW",
+    "title": "From group to stage review",
+    "intro": "The Ganza pathway narrows the group using eligibility, readiness, workload, and coach review. It does not replace the coach's decision.",
+    "pill": "0 automatic",
+    "steps": [
+      { "number": "01", "title": "Eligible group", "detail": "24 students", "status": "Complete" },
+      { "number": "02", "title": "Readiness screen", "detail": "18 students", "status": "Complete" },
+      { "number": "03", "title": "Load and growth review", "detail": "12 students", "status": "In progress" },
+      { "number": "04", "title": "Coach review", "detail": "Your decision", "status": "Coach-led" }
+    ]
+  },
+  "shortlist": [
+    { "name": "Ishimwe Eric", "position": "Right-back", "signal": "Low risk", "metric": "82 readiness", "tone": "mint" },
+    { "name": "Uwase A.", "position": "Forward", "signal": "Strong form", "metric": "8.4 / 10", "tone": "violet" },
+    { "name": "Niyonzima F.", "position": "Midfielder", "signal": "Load high", "metric": "91% load", "tone": "coral" },
+    { "name": "Patrick K.", "position": "Goalkeeper", "signal": "Staff review", "metric": "Hold", "tone": "muted" }
+  ],
+  "coachActions": [
+    { "title": "Keep normal training plan", "detail": "Recovery is within the target range." },
+    { "title": "Review after next session", "detail": "Recalculate load after Tuesday training." },
+    { "title": "Share only operational status", "detail": "Medical details remain restricted to clinical staff." }
+  ],
+  "actionQueue": {
+    "eyebrow": "COACH ACTION QUEUE",
+    "title": "What needs your attention",
+    "intro": "The coach works with the record, not a diagnosis. Load reviews, recovery follow-ups, and guardian consent stay visible; clinical detail stays with medical staff.",
+    "items": [
+      { "title": "Early load and recovery review", "detail": "Ishimwe Eric · Today 14:00 · Coach + clinician" },
+      { "title": "Recovery questionnaire follow-up", "detail": "Uwase A. · Tomorrow 09:00 · Coach" },
+      { "title": "Guardian consent renewal", "detail": "2 guardians · before 15 Sep · Registry + safeguarding" },
+      { "title": "Academic support planning", "detail": "1 student · within 10 days · Safeguarding + coach + guardian" }
+    ]
+  },
+  "cohort": {
+    "eyebrow": "ISONGA GROUP CONTEXT",
+    "title": "Where the group sits",
+    "intro": "De-identified, school-level picture of the Isonga centre. Individual records stay with each student.",
+    "stats": [
+      { "label": "Students", "value": "24" },
+      { "label": "Girls / Boys", "value": "10 / 14" },
+      { "label": "Train to Train", "value": "13" },
+      { "label": "Consent", "value": "99%" }
+    ]
+  },
+  "matches": {
+    "eyebrow": "EVALUATION LIBRARY",
+    "title": "Choose the evidence",
+    "intro": "Every insight below starts with an uploaded evaluation, not an unexplained conclusion.",
+    "pill": "3 processed"
+  },
+  "videos": {
+    "eyebrow": "VIDEO EVIDENCE",
+    "title": "Select a view",
+    "eval": {
+      "label": "Training evaluation",
+      "caption": "Solo training clip · touch, control and sprint",
+      "src": "/one-kid-training.mp4",
+      "poster": "/one-kid-training-poster.jpg",
+      "insights": {
+        "eyebrow": "AI INSIGHTS · TRAINING EVALUATION",
+        "title": "What the evaluation found",
+        "items": [
+          { "title": "Touch under control", "detail": "42 controlled touches recorded, up 6 on the last evaluation, with few wasted first touches.", "action": "Keep the control ladder in warm-up" },
+          { "title": "Shot delivery", "detail": "3 shots taken, 1 on target, all from the right channel inside the area.", "action": "Add finishing reps after drills" },
+          { "title": "Sprint output", "detail": "Top sprint reached 28.4 km/h, inside his normal range for a Train to Train window.", "action": "Monitor volume on high-speed reps" }
+        ]
+      }
+    },
+    "tactical": {
+      "label": "Tactical analysis",
+      "caption": "Match footage · team shape and movement",
+      "src": "/performance-demo.mp4",
+      "poster": "/match-analysis-poster.jpg",
+      "insights": {
+        "eyebrow": "AI INSIGHTS · ISONGA INTER-SCHOOL",
+        "title": "What the match showed",
+        "items": [
+          { "title": "Right-side overload", "detail": "St Joseph Kabgayi created 38% of progressive actions through Ishimwe's side in the second half.", "action": "Protect the channel late in matches" },
+          { "title": "Press trigger", "detail": "The group recovered possession 23 times within 6 seconds of losing the ball.", "action": "Repeat the second-half press cue" },
+          { "title": "Recovery window", "detail": "Ishimwe's high-intensity output stayed within his established five-evaluation range.", "action": "Keep normal recovery plan" }
+        ]
+      }
+    }
+  }
+}
