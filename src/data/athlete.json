@@ -1,13 +1,17 @@
 {
-  "id": "RW-UG20-0482",
-  "name": "Eric M.",
-  "club": "AS Kigali",
+  "id": "RW-IS-24-0782",
+  "name": "Ishimwe Eric",
+  "club": "St Joseph Kabgayi",
+  "school": "Isonga Centre at St Joseph Kabgayi",
   "sport": "Football",
   "competitionLevel": "U20",
   "position": "Right-back",
   "eligibility": "Cleared",
   "medicalStatus": "Monitoring",
-  "readiness": 82,
+  "readiness": 62,
+  "stage": "Train to Train",
+  "stageProgress": 62,
+  "nextStage": "Train to Compete",
   "currentForm": 8.2,
   "minutesPlayed": 384,
   "topSpeed": 28.4,
@@ -20,5 +24,10 @@
     "energy": "7 / 10",
     "bodyPart": "Right knee",
     "bodyPartStatus": "Monitoring"
+  },
+  "homeAddress": {
+    "district": "Muhanga",
+    "sector": "Kabgayi",
+    "guardian": "J. Habimana"
   }
 }

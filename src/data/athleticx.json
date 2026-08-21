@@ -1,0 +1,111 @@
+{
+  "commandCentre": {
+    "headline": "See the athlete, the evidence, and the next responsible action.",
+    "sub": "A presentation simulation of how a national sports system coordinates athlete welfare, team decisions, and Ministry oversight without turning indicators into diagnoses.",
+    "kpis": [
+      { "label": "Active athletes", "value": "126", "detail": "Across 4 priority federations" },
+      { "label": "Review actions", "value": "5", "detail": "Open · qualified review required" },
+      { "label": "Protocol coverage", "value": "91%", "detail": "Current weekly completion" },
+      { "label": "Injury episodes", "value": "14", "detail": "4 in active care coordination" }
+    ],
+    "consent": "2 medical-data consent windows — Action due (Aline 14d · Mutesi 32d)",
+    "queue": [
+      { "name": "Aline Uwase", "when": "Today 14:00", "title": "Early load and recovery review", "owners": "Coach + Dr. Jean Niyonzima" },
+      { "name": "Shyaka Keza", "when": "Tomorrow 09:00", "title": "Left/right balance asymmetry to re-test", "owners": "A. Mukamana, Physio" },
+      { "name": "Mutesi Divine", "when": "Tomorrow 11:30", "title": "Recovery questionnaire follow-up", "owners": "S. Habimana, Coach" }
+    ],
+    "signal": {
+      "who": "Aline Uwase — 7-day context",
+      "rhr": "78 bpm",
+      "baseline": "66 bpm",
+      "deviation": "+12 bpm",
+      "owner": "Dr. N. Okoro",
+      "due": "today 14:00"
+    }
+  },
+  "athleteDirectory": {
+    "ids": ["ARD-RW-ATH-24-04172", "ARD-RW-FBL-23-01986", "ARD-RW-AQU-24-02841", "ARD-RW-BSK-23-03314", "ARD-RW-TEN-24-01063"],
+    "athletes": [
+      { "name": "Aline Uwase", "id": "ARD-RW-ATH-24-04172", "sport": "Athletics — 400m", "region": "Eastern Province", "consent": "due — 14d", "readiness": 62 },
+      { "name": "Niyonkuru Fabrice", "id": "ARD-RW-FBL-23-01986", "sport": "Football Midfield", "region": "Northern", "consent": "88 Stable", "readiness": 88 },
+      { "name": "Mutesi Divine", "id": "ARD-RW-AQU-24-02841", "sport": "Swimming 200m Free", "region": "Kigali", "consent": "32d", "readiness": 76 },
+      { "name": "Shyaka Keza", "id": "ARD-RW-BSK-23-03314", "sport": "Basketball Guard", "region": "Southern", "consent": "Building", "readiness": 71 },
+      { "name": "Manzi Ishimwe", "id": "ARD-RW-TEN-24-01063", "sport": "Tennis Singles", "region": "Western", "consent": "Stable", "readiness": 84 }
+    ],
+    "profile": {
+      "dob": "18 September 2010 — Female",
+      "nationality": "Rwandan — RWA",
+      "centre": "Eastern Province — Nyagatare Development Centre",
+      "academy": "Nyagatare Athletics Academy — demo — Affiliation verified — 2026 season",
+      "contract": "Youth athlete development agreement — 01 Jan 2026 — 31 Dec 2026",
+      "guardian": "M. Uwase",
+      "consent": "v1.0 valid — Verified 12 Aug 2026"
+    }
+  },
+  "developmentPathway": {
+    "phases": [
+      { "no": 1, "name": "Active Start", "age": "0–6 years", "focus": "Enjoyment, active play, basic movement confidence" },
+      { "no": 2, "name": "FUNdamentals", "age": "Girls 6–8 · Boys 6–9", "focus": "Agility, balance, coordination, running, jumping" },
+      { "no": 3, "name": "Learn to Train", "age": "Girls 8–11 · Boys 9–12", "focus": "Broad sport skills, safe technique, participation variety" },
+      { "no": 4, "name": "Train to Train", "age": "Girls 11–15 · Boys 12–16", "focus": "Growth-aware workload, aerobic base, speed, strength, coordination" },
+      { "no": 5, "name": "Train to Compete", "age": "Girls 15–21+ · Boys 16–23+", "focus": "Sport-specific performance, training-load context" },
+      { "no": 6, "name": "Train to Win", "age": "Women 18+ · Men 19+", "focus": "Individual plans, specialist services" },
+      { "no": 7, "name": "Active for Life", "age": "Any age", "focus": "Continued activity, coaching, officiating, leadership" }
+    ],
+    "growth": { "height": "159.4 cm", "delta": "+12.2 cm across 18 months", "weight": "47.2 kg", "velocity": "7.2 cm/yr" },
+    "battery": [
+      { "domain": "Speed", "test": "30 m sprint", "value": "4.92 s", "trend": "−0.17 s" },
+      { "domain": "Strength", "test": "Push-up capacity", "value": "12 reps", "trend": "+2" },
+      { "domain": "Agility", "test": "505 change of direction", "value": "5.91 s", "trend": "−0.11 s" },
+      { "domain": "Coordination", "test": "Y Balance asymmetry", "value": "3.2 cm", "trend": "−1.6 cm" },
+      { "domain": "Endurance", "test": "YYIR1", "value": "760 m", "trend": "+120 m" },
+      { "domain": "Power", "test": "Countermovement jump", "value": "31.8 cm", "trend": "+2.4 cm" },
+      { "domain": "Movement", "test": "FMS composite", "value": "15 / 21", "trend": "+1" },
+      { "domain": "Power", "test": "Broad jump", "value": "1.72 m", "trend": "+0.08 m" }
+    ]
+  },
+  "preventionCare": {
+    "alerts": 3,
+    "training": "4 sessions 220 min · moderate intensity",
+    "sleep": "6.4 h 5-night trend",
+    "roles": ["Clinical lead Dr. Jean Niyonzima", "Physio A. Mukamana", "Nutrition D. Uwamahoro", "Coach & safeguarding S. Habimana"],
+    "handbook": "Ganza keeps records, sustains longitudinal history — not a one-off test"
+  },
+  "stakeholderCommunication": {
+    "overdue": 1,
+    "queue": [
+      { "title": "Early load review", "status": "overdue", "recipients": "Coach + clinician", "owner": "Clinical lead", "due": "yesterday 16:00" },
+      { "title": "Guardian consent renewal", "status": "due", "recipients": "Registry + safeguarding + guardian", "owner": "Registry lead", "due": "before 15 Sep" },
+      { "title": "Academic support planning", "status": "acknowledged", "recipients": "Safeguarding + coach + guardian", "owner": "Safeguarding lead", "due": "Within 10 days" },
+      { "title": "Academy affiliation verification", "status": "acknowledged", "recipients": "Registry + academy liaison", "owner": "Registry lead", "due": "Completed" }
+    ]
+  },
+  "progressionReview": {
+    "eligible": 2,
+    "automatic": 0,
+    "domains": ["Sustained progression · Repeated personal-baseline trends", "Assessment integrity · Protocol completion & quality", "Wellbeing & safeguarding · Recovery, injury and growth visible", "Panel judgement · Coach, clinician and pathway lead documented"],
+    "pool": [
+      { "name": "Mugisha K.", "sport": "Athletics — 800m", "phase": "Train to Train", "trend": "+8.6%", "coverage": "96%", "context": "Stable" },
+      { "name": "Umutoni A.", "sport": "Cycling — Road", "phase": "Train to Train", "trend": "+7.9%", "coverage": "93%", "context": "Stable" },
+      { "name": "Habimana E.", "sport": "Football Midfield", "phase": "Learn to Train", "trend": "+5.4%", "coverage": "88%", "context": "Building" },
+      { "name": "Mukandayisenga N.", "sport": "Basketball Guard", "phase": "Train to Train", "trend": "+4.8%", "coverage": "91%", "context": "Review due" }
+    ]
+  },
+  "cohortIntelligence": {
+    "pilot": 1248,
+    "regions": 5,
+    "disciplines": 8,
+    "girls": 576,
+    "boys": 648,
+    "unrecorded": 24,
+    "trainToTrain": 482,
+    "coverage": [
+      { "label": "Consent & guardian", "value": "99%" },
+      { "label": "Health & growth", "value": "93%" },
+      { "label": "Performance battery", "value": "89%" },
+      { "label": "Recovery & wellbeing", "value": "86%" },
+      { "label": "Injury surveillance", "value": "82%" }
+    ],
+    "consent": { "current": "95% 1186 of 1248", "renewal": 56, "missing": 62, "last": "15 Aug 2026 policy v1.0" }
+  }
+}
