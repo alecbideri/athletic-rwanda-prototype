@@ -1,0 +1,136 @@
+{
+  "school": "St Joseph Kabgayi",
+  "centre": "Isonga Centre at St Joseph Kabgayi",
+  "staff": {
+    "name": "Dr. Jean Niyonzima",
+    "role": "Academy clinical lead"
+  },
+  "overview": {
+    "eyebrow": "ACADEMY MEDICAL · ST JOSEPH KABGAYI",
+    "title": "Protect the student before the injury.",
+    "description": "A clinical workspace for screening, injury surveillance, rehabilitation, and clearance decisions at the Isonga centre.",
+    "heroLabel": "CLINICAL WORKLOAD",
+    "heroTitle": "4 students need medical attention today.",
+    "heroText": "Prioritize the cases that affect training, wellbeing, and safe return to the group.",
+    "heroCount": "4",
+    "heroCountLabel": "active reviews",
+    "kpis": [
+      { "label": "Active cases", "value": "4", "detail": "2 new this week", "tone": "coral" },
+      { "label": "In rehabilitation", "value": "3", "detail": "1 near clearance", "tone": "violet" },
+      { "label": "Cleared today", "value": "6", "detail": "No restrictions", "tone": "mint" },
+      { "label": "Screening due", "value": "8", "detail": "Next 14 days", "tone": "neutral" }
+    ],
+    "insights": [
+      { "title": "Immediate review", "detail": "Niyonzima F. has elevated workload and a reported hamstring concern.", "action": "Open case", "tone": "coral" },
+      { "title": "Rehabilitation progress", "detail": "Patrick K. completed the current strength and mobility block.", "action": "View rehab", "tone": "violet" },
+      { "title": "Screening programme", "detail": "Eight students are due for repeat movement and growth checks.", "action": "Open schedule", "tone": "mint" }
+    ]
+  },
+  "cases": {
+    "eyebrow": "INJURY SURVEILLANCE",
+    "title": "Active cases",
+    "intro": "Clinical cases are visible only to authorized medical staff and are separated from coach and Ministry views.",
+    "searchPlaceholder": "Search student or body region",
+    "list": [
+      { "name": "Ishimwe Eric", "club": "St Joseph Kabgayi · Right-back", "region": "Right knee", "mechanism": "Self-reported", "status": "Review today", "tone": "coral" },
+      { "name": "Niyonzima F.", "club": "St Joseph Kabgayi · Midfielder", "region": "Hamstring", "mechanism": "Training load", "status": "Monitoring", "tone": "violet" },
+      { "name": "Patrick K.", "club": "St Joseph Kabgayi · Goalkeeper", "region": "Ankle", "mechanism": "Contact", "status": "Rehab", "tone": "mint" },
+      { "name": "Uwase A.", "club": "St Joseph Kabgayi · Forward", "region": "Calf", "mechanism": "Awaiting exam", "status": "Awaiting exam", "tone": "muted" }
+    ],
+    "data": [
+      { "label": "Incidence", "value": "4", "detail": "New cases this term" },
+      { "label": "Days affected", "value": "18", "detail": "Across active cases" },
+      { "label": "Recurrence", "value": "1", "detail": "Needs follow-up" },
+      { "label": "Top region", "value": "Knee", "detail": "32% of reports" }
+    ],
+    "featured": {
+      "eyebrow": "CASE REPORT",
+      "title": "Ishimwe Eric · Right knee",
+      "meta": "RW-IS-24-0782 · Football · Right-back · Train to Train",
+      "bodyPart": "Right knee",
+      "reported": "Self-reported · Tuesday check-in",
+      "severity": "Mild · can train",
+      "mechanism": "Training load",
+      "status": "Monitoring",
+      "owner": "Dr. Jean Niyonzima",
+      "report": "Ishimwe flagged the right knee during the weekly wellness check-in. It is a mild, movement-related report with no contact episode. The knee is being monitored alongside his training load; there is no sign it needs restriction today.",
+      "signals": [
+        { "label": "Reported", "value": "Tuesday 08:40" },
+        { "label": "Severity", "value": "Mild · can train" },
+        { "label": "Recovery", "value": "82%" },
+        { "label": "Load", "value": "72% · within range" }
+      ],
+      "next": [
+        { "title": "Repeat movement screen", "detail": "Ishimwe · Before next session" },
+        { "title": "Review load with coach", "detail": "Dr. Niyonzima + S. Habimana · Tomorrow" },
+        { "title": "Schedule follow-up exam", "detail": "Right knee · Within 5 days" }
+      ]
+    }
+  },
+  "rehab": {
+    "eyebrow": "REHABILITATION",
+    "title": "Progress without guesswork",
+    "intro": "Track treatment milestones, movement checks, and the evidence required before clearance.",
+    "pill": "3 ACTIVE",
+    "list": [
+      { "name": "Ishimwe Eric", "injury": "Right knee monitoring", "progress": "64%", "next": "Repeat movement screen", "tone": "violet" },
+      { "name": "Patrick K.", "injury": "Ankle sprain", "progress": "82%", "next": "Single-leg stability", "tone": "mint" },
+      { "name": "Niyonzima F.", "injury": "Hamstring concern", "progress": "28%", "next": "Clinical assessment", "tone": "coral" }
+    ],
+    "tests": {
+      "eyebrow": "MOVEMENT & WELLBEING CHECKS",
+      "title": "Latest assessment results, by student",
+      "items": [
+        { "student": "Ishimwe Eric", "name": "Movement screen", "score": "15 / 21", "result": "Acceptable" },
+        { "student": "Patrick K.", "name": "Balance check", "score": "3.2 cm", "result": "Within target" },
+        { "student": "Niyonzima F.", "name": "Jump power", "score": "36 cm", "result": "Baseline stable" },
+        { "student": "Uwase A.", "name": "Resting heart rate", "score": "62 bpm", "result": "At baseline" }
+      ]
+    },
+    "plan": {
+      "eyebrow": "CARE PLAN",
+      "title": "Next clinical actions",
+      "items": [
+        { "title": "Repeat movement screen", "detail": "Ishimwe · Before next session" },
+        { "title": "Update rehabilitation plan", "detail": "Patrick K. · After stability test" },
+        { "title": "Schedule DPO-safe case review", "detail": "Niyonzima F. · Today at 15:00" }
+      ]
+    }
+  },
+  "clearance": {
+    "heroEyebrow": "RETURN TO THE GROUP",
+    "heroTitle": "Clearance decisions need evidence.",
+    "heroText": "Review medical status, movement checks, and workload context before a student returns to full training.",
+    "cards": [
+      { "name": "Ishimwe Eric", "status": "Monitoring", "detail": "Clear for normal training", "tone": "violet" },
+      { "name": "Patrick K.", "status": "Conditional", "detail": "Clear after stability test", "tone": "mint" },
+      { "name": "Niyonzima F.", "status": "Hold", "detail": "Clinical review required", "tone": "coral" }
+    ],
+    "queueEyebrow": "CLEARANCE QUEUE",
+    "queueTitle": "Decisions awaiting sign-off",
+    "queue": [
+      { "name": "Patrick K.", "decision": "Conditional clearance", "evidence": "Rehab 82% · stability test pending" },
+      { "name": "Niyonzima F.", "decision": "Hold from high intensity", "evidence": "Hamstring concern · clinical exam pending" },
+      { "name": "Ishimwe Eric", "decision": "Normal training", "evidence": "Readiness 82 · load within range" }
+    ],
+    "featured": {
+      "eyebrow": "CLEARANCE REVIEW",
+      "title": "Ishimwe Eric · Clearance for normal training",
+      "meta": "RW-IS-24-0782 · Right knee monitoring · Ready to review",
+      "status": "Pending sign-off",
+      "intro": "A clearance is a review, not a checkbox. The staff check the record, the movement screen, and the load context before Ishimwe returns to the group.",
+      "process": [
+        { "number": "01", "title": "Record reviewed", "detail": "Right knee history, wellness checks, and rehab progress opened and confirmed.", "status": "Done", "tone": "mint" },
+        { "number": "02", "title": "Movement screen", "detail": "Movement screen 15/21, balance within target, jump power stable.", "status": "Done", "tone": "mint" },
+        { "number": "03", "title": "Load context", "detail": "Training load 72%, within range. Recovery 82% steady.", "status": "Done", "tone": "mint" },
+        { "number": "04", "title": "Coach agreement", "detail": "S. Habimana confirms normal training plan, no overload intervention.", "status": "In review", "tone": "violet" },
+        { "number": "05", "title": "Sign off", "detail": "Dr. Jean Niyonzima to confirm clearance today.", "status": "Pending", "tone": "coral" }
+      ],
+      "comments": [
+        { "by": "Dr. Jean Niyonzima", "when": "Today · 09:05", "text": "Right knee report is mild and movement-related. Movement screen and balance are within target. No restriction needed." },
+        { "by": "S. Habimana · Coach", "when": "Today · 09:20", "text": "Agreed. Ishimwe keeps the normal training plan. I will watch the knee in warm-up for the next two sessions." },
+        { "by": "Dr. Jean Niyonzima", "when": "Today · 09:35", "text": "Adding the follow-up exam within 5 days as a safeguard. Clearance is evidence-based, not automatic." }
+      ]
+    }
+  }
+}

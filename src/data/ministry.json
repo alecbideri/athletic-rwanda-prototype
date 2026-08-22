@@ -1,0 +1,113 @@
+{
+  "persona": {
+    "eyebrow": "MINISTRY OF SPORT · ISONGA COORDINATOR",
+    "title": "The Isonga pilot, in view.",
+    "description": "A governed, de-identified picture of the Isonga pilot: active students, open reviews, centres on track, and consent status."
+  },
+  "overview": {
+    "heroLabel": "PROGRAMME HEALTH",
+    "heroTitle": "On track for the next gate",
+    "heroText": "Registry, centre rollout, and data governance are moving together on the Isonga pilot.",
+    "heroScore": "4",
+    "heroScoreDetail": "of 5 centres on track",
+    "kpis": [
+      { "label": "Students registered", "value": "1,248+", "trend": "Pilot cohort", "icon": "Pulse" },
+      { "label": "Centres active", "value": "5", "trend": "1 onboarding", "icon": "CirclesFour" },
+      { "label": "Open reviews", "value": "5", "trend": "Human-owned", "icon": "Activity" },
+      { "label": "Consent", "value": "95%", "trend": "Renewals tracked", "icon": "ClipboardText" }
+    ]
+  },
+  "cohort": {
+    "title": "Governed view — 1,248 records",
+    "tag": "Isonga",
+    "intro": "Girls 576 · Boys 648 · 5 regions · 8 disciplines · Train to Train 482 largest cohort · Consent 99% · Injury surveillance 82%",
+    "summary": [
+      { "label": "Current consent", "value": "95% · 1,186 of 1,248" },
+      { "label": "Renewal attention", "value": "56" },
+      { "label": "Missing", "value": "62" }
+    ],
+    "breakdown": [
+      { "label": "Girls", "value": "576", "detail": "46% of pilot" },
+      { "label": "Boys", "value": "648", "detail": "52% of pilot" },
+      { "label": "Regions", "value": "5", "detail": "Across Isonga" },
+      { "label": "Disciplines", "value": "8", "detail": "Sport-agnostic" }
+    ],
+    "coverage": [
+      { "label": "Consent & guardian", "value": "99%" },
+      { "label": "Health & growth", "value": "93%" },
+      { "label": "Performance battery", "value": "89%" },
+      { "label": "Recovery & wellbeing", "value": "86%" },
+      { "label": "Injury surveillance", "value": "82%" }
+    ],
+    "stageHighlight": { "label": "Largest cohort", "stage": "Train to Train", "count": "482", "note": "Growth-aware years — where support matters most" }
+  },
+  "registry": {
+    "pulseTitle": "Isonga athlete record",
+    "intro": "The registry is the pilot's source of truth for who a student is, where they train, and whether their record is eligible and governed.",
+    "summary": [
+      { "label": "Unique student IDs", "value": "1,248" },
+      { "label": "Duplicate records resolved", "value": "12" },
+      { "label": "Records updated this week", "value": "214" }
+    ],
+    "searchPlaceholder": "Search student, school, or ID",
+    "lifecycle": [
+      { "label": "Capture", "detail": "Profile created" },
+      { "label": "Verify", "detail": "Identity checked" },
+      { "label": "Govern", "detail": "Consent recorded" },
+      { "label": "Activate", "detail": "Ready for use" }
+    ],
+    "tableTitle": "Registration by centre",
+    "tableHead": ["Centre", "Students", "Eligibility", "Change"],
+    "rows": [
+      { "name": "St Joseph Kabgayi", "sport": "Football", "count": "312", "status": "98% cleared", "change": "31" },
+      { "name": "Lycée de Kigali", "sport": "Football · Athletics", "count": "284", "status": "96% cleared", "change": "24" },
+      { "name": "Groupe Scolaire de Butare", "sport": "Basketball", "count": "246", "status": "94% cleared", "change": "18" },
+      { "name": "Collège Christ-Roi", "sport": "Volleyball", "count": "218", "status": "92% cleared", "change": "15" },
+      { "name": "Isonga Centre Karongi", "sport": "Swimming · Tennis", "count": "188", "status": "88% cleared", "change": "12" }
+    ]
+  },
+  "coverage": {
+    "title": "Where delivery is moving",
+    "intro": "Coverage measures verified onboarding, active data flow, and trained staff at each Isonga centre.",
+    "centres": [
+      { "name": "St Joseph Kabgayi", "detail": "Football · Phase 2", "coverage": 96, "status": "high" },
+      { "name": "Lycée de Kigali", "detail": "Football · Athletics · Phase 2", "coverage": 91, "status": "mid" },
+      { "name": "Groupe Scolaire de Butare", "detail": "Basketball · Phase 1", "coverage": 78, "status": "mid" },
+      { "name": "Collège Christ-Roi", "detail": "Volleyball · Phase 1", "coverage": 66, "status": "mid" },
+      { "name": "Isonga Centre Karongi", "detail": "Swimming · Tennis · Onboarding", "coverage": 44, "status": "low" }
+    ],
+    "snapshot": [
+      { "label": "Active data flows", "value": "18", "detail": "Across 5 centres" },
+      { "label": "Onboarding complete", "value": "4 / 5", "detail": "One in rollout" },
+      { "label": "Trained staff", "value": "48", "detail": "Coaches and medics" }
+    ],
+    "gates": [
+      { "number": "01", "title": "Mandate and data agreement", "status": "Complete" },
+      { "number": "02", "title": "Registry and passport setup", "status": "In progress" },
+      { "number": "03", "title": "Performance pipeline activation", "status": "Next gate" }
+    ]
+  },
+  "governance": {
+    "title": "Trust status",
+    "statusTitle": "Protected and in-country",
+    "statusDetail": "HORAS Labs · Rwanda",
+    "list": [
+      { "label": "Data residency", "value": "Compliant" },
+      { "label": "Access events", "value": "0 unresolved" },
+      { "label": "DPO review", "value": "Current" }
+    ],
+    "previewEyebrow": "LATEST CONTROL",
+    "previewTitle": "Medical record access is restricted",
+    "previewDetail": "Only authorized medical staff can view individual clinical details.",
+    "access": [
+      { "title": "Athlete", "access": "Own record", "detail": "Passport, wellness, self-report" },
+      { "title": "Medical staff", "access": "Full clinical", "detail": "Verified care and injury details" },
+      { "title": "Ministry", "access": "Aggregate only", "detail": "No individual medical records" }
+    ],
+    "audit": [
+      { "time": "Today · 09:14", "title": "DPO review completed", "detail": "No unresolved findings" },
+      { "time": "Yesterday · 16:42", "title": "HORAS backup verified", "detail": "In-country recovery point confirmed" },
+      { "time": "12 May 2026", "title": "RISA pathway updated", "detail": "Technical review record attached" }
+    ]
+  }
+}

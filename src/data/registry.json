@@ -1,15 +1,9 @@
 {
-  "athletesRegistered": 2500,
+  "athletesRegistered": 1248,
   "federationsActive": 5,
-  "matchesDigitized": 500,
-  "personnelTrained": 100,
-  "uniqueAthleteIds": 2500,
-  "duplicatesResolved": 38,
-  "recordsUpdatedThisWeek": 214,
-  "federationRecords": [
-    { "name": "FERWAFA", "sport": "Football", "registered": 1420, "eligibility": "98% cleared", "change": 124 },
-    { "name": "Rwanda Athletics", "sport": "Track & field", "registered": 486, "eligibility": "94% cleared", "change": 52 },
-    { "name": "Rwanda Volleyball", "sport": "Volleyball", "registered": 318, "eligibility": "91% cleared", "change": 38 },
-    { "name": "Other federations", "sport": "4 programmes", "registered": 276, "eligibility": "88% cleared", "change": 19 }
-  ]
+  "matchesDigitized": 18,
+  "personnelTrained": 48,
+  "uniqueAthleteIds": 1248,
+  "duplicatesResolved": 12,
+  "recordsUpdatedThisWeek": 214
 }

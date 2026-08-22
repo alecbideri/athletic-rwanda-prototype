@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import {
   Pulse,
   ArrowUpRight,
+  Buildings,
   CaretRight,
+  ChartLine,
   Check,
   CirclesFour,
   ClipboardText,
@@ -20,14 +22,13 @@ import {
   X,
 } from '@phosphor-icons/react'
 import { prototypeData } from './data'
-import athleticx from './data/athleticx.json'
 
 const Activity = Pulse
-const { athlete, coach, federations, matches, registry } = prototypeData
+const { athlete, coach, matches, medical, ministry } = prototypeData
 
 type View = 'home' | 'passport' | 'performance' | 'health' | 'ministry' | 'federation' | 'coach' | 'medical'
 type Modal = 'passport' | 'performance' | 'highlights' | 'health' | 'ministry' | 'body' | 'report' | null
-type MinistrySection = 'overview' | 'registry' | 'coverage' | 'governance'
+type MinistrySection = 'overview' | 'cohort' | 'registry' | 'coverage' | 'governance'
 type FederationSection = 'overview' | 'registry' | 'clubs' | 'readiness'
 type CoachSection = 'overview' | 'squad' | 'players' | 'matches'
 type MedicalSection = 'overview' | 'cases' | 'rehab' | 'clearance'
@@ -70,8 +71,9 @@ const navItems: NavItem[] = [
 
 const ministryNavItems: NavItem[] = [
   { id: 'ministry', label: 'Overview', icon: CirclesFour, target: 'ministry-overview' },
+  { id: 'ministry', label: 'Cohort', icon: ChartLine, target: 'ministry-cohort' },
   { id: 'ministry', label: 'Registry', icon: ClipboardText, target: 'ministry-registry' },
-  { id: 'ministry', label: 'Coverage', icon: Heartbeat, target: 'ministry-coverage' },
+  { id: 'ministry', label: 'Centres', icon: Buildings, target: 'ministry-coverage' },
   { id: 'ministry', label: 'Governance', icon: LockKey, target: 'ministry-governance' },
 ]
 
@@ -97,7 +99,7 @@ const medicalNavItems: NavItem[] = [
 ]
 
 // temporarily disabled routes — keep for re-enable (FERWAFA permanently disabled)
-void ministryNavItems; void federationNavItems; void medicalNavItems
+void federationNavItems
 
 function App() {
   const [view, setView] = useState<View>('home')
@@ -118,11 +120,11 @@ function App() {
   const isMedical = view === 'medical'
 
   useEffect(() => {
-    if (isMinistry || isFederation || isMedical) {
+    if (isFederation) {
       setView('home')
       setMobileShell(true)
     }
-  }, [isMinistry, isFederation, isMedical])
+  }, [isFederation])
   const go = (next: View) => {
     setView(next)
     if (next === 'ministry') setMinistrySection('overview')
@@ -156,7 +158,7 @@ function App() {
     closeModal()
   }
 
-  void selectMinistrySection; void selectFederationSection; void selectMedicalSection
+  void selectFederationSection
 
   return (
     <main className="app-stage">
@@ -164,8 +166,12 @@ function App() {
         <div className="brand-lockup"><span className="brand-mark">GZ</span><span>Ganza</span></div>
         <div className="demo-controls">
           <span className="demo-label">{isMinistry ? 'Ministry prototype' : isFederation ? 'FERWAFA prototype' : isCoach ? 'Coach prototype' : isMedical ? 'Medical prototype' : 'Athlete prototype'}</span>
-          {!isCoach && <button className="role-switch" onClick={() => { setView('coach'); setCoachSection('overview'); setMobileShell(false) }}>Open Coach view</button>}
+          {!isCoach && !isMedical && !isMinistry && <button className="role-switch" onClick={() => { setView('coach'); setCoachSection('overview'); setMobileShell(false) }}>Open Coach view</button>}
+          {!isMedical && !isCoach && !isMinistry && <button className="role-switch" onClick={() => { setView('medical'); setMedicalSection('overview'); setMobileShell(false) }}>Open Medical view</button>}
+          {!isMinistry && !isCoach && !isMedical && <button className="role-switch" onClick={() => { setView('ministry'); setMinistrySection('overview'); setMobileShell(false) }}>Open Ministry view</button>}
           {isCoach && <button className="role-switch" onClick={() => { setView('home'); setMobileShell(true) }}>Return to Athlete</button>}
+          {isMedical && <button className="role-switch" onClick={() => { setView('home'); setMobileShell(true) }}>Return to Athlete</button>}
+          {isMinistry && <button className="role-switch" onClick={() => { setView('home'); setMobileShell(true) }}>Return to Athlete</button>}
           <button className={`shell-toggle ${mobileShell ? 'is-active' : ''}`} onClick={() => setMobileShell((current) => !current)}>
             <DeviceMobile size={16} weight="bold" />
             {mobileShell ? 'Mobile shell' : 'Responsive view'}
@@ -183,11 +189,11 @@ function App() {
           <div className="app-layout">
             <aside className="sidebar">
               <div className="side-intro">
-                {isCoach ? <><span className="side-overline">COACH VIEW · {coach.coach.discipline}</span><strong>{coach.coach.name}</strong><span>{coach.coach.role}</span></> : <><span className="side-overline">ATHLETE PORTAL</span><strong>{athlete.name}</strong><span>{athlete.club} · {athlete.competitionLevel}</span></>}
+                {isCoach ? <><span className="side-overline">COACH VIEW · {coach.coach.discipline}</span><strong>{coach.coach.name}</strong><span>{coach.coach.role}</span></> : isMedical ? <><span className="side-overline">MEDICAL VIEW</span><strong>{medical.staff.name}</strong><span>{medical.staff.role}</span></> : isMinistry ? <><span className="side-overline">MINISTRY VIEW</span><strong>Isonga Coordinator</strong><span>MINISPORTS · De-identified</span></> : <><span className="side-overline">ATHLETE PORTAL</span><strong>{athlete.name}</strong><span>{athlete.club} · {athlete.competitionLevel}</span></>}
               </div>
               <nav aria-label="Athlete navigation">
-                {(isCoach ? coachNavItems : navItems).map(({ id, label, icon: Icon, target }, index) => (
-                  <button key={`${isCoach ? 'coach' : 'athlete'}-${label}-${index}`} className={`nav-item ${isCoach ? (coachSection === (target?.replace('coach-', '') as CoachSection) ? 'is-current' : '') : (view === id ? 'is-current' : '')}`} onClick={() => isCoach ? selectCoachSection(target) : go(id)}>
+                {(isCoach ? coachNavItems : isMedical ? medicalNavItems : isMinistry ? ministryNavItems : navItems).map(({ id, label, icon: Icon, target }, index) => (
+                  <button key={`${isCoach ? 'coach' : isMedical ? 'medical' : isMinistry ? 'ministry' : 'athlete'}-${label}-${index}`} className={`nav-item ${isCoach ? (coachSection === (target?.replace('coach-', '') as CoachSection) ? 'is-current' : '') : isMedical ? (medicalSection === (target?.replace('medical-', '') as MedicalSection) ? 'is-current' : '') : isMinistry ? (ministrySection === (target?.replace('ministry-', '') as MinistrySection) ? 'is-current' : '') : (view === id ? 'is-current' : '')}`} onClick={() => isCoach ? selectCoachSection(target) : isMedical ? selectMedicalSection(target) : isMinistry ? selectMinistrySection(target) : go(id)}>
                     <Icon size={18} weight={view === id ? 'fill' : 'regular'} />{label}
                   </button>
                 ))}
@@ -215,8 +221,8 @@ function App() {
                 {view === 'medical' && <MedicalView section={medicalSection} />}
               </div>
               <nav className="bottom-nav" aria-label="Mobile navigation">
-                {(isCoach ? coachNavItems : navItems).map(({ id, label, icon: Icon, target }) => (
-                  <button key={`${isCoach ? 'coach' : 'athlete'}-${label}`} className={`bottom-item ${isCoach ? (coachSection === (target?.replace('coach-', '') as CoachSection) ? 'is-current' : '') : (view === id ? 'is-current' : '')}`} onClick={() => isCoach ? selectCoachSection(target) : go(id)}>
+                {(isCoach ? coachNavItems : isMedical ? medicalNavItems : isMinistry ? ministryNavItems : navItems).map(({ id, label, icon: Icon, target }) => (
+                  <button key={`${isCoach ? 'coach' : isMedical ? 'medical' : isMinistry ? 'ministry' : 'athlete'}-${label}`} className={`bottom-item ${isCoach ? (coachSection === (target?.replace('coach-', '') as CoachSection) ? 'is-current' : '') : isMedical ? (medicalSection === (target?.replace('medical-', '') as MedicalSection) ? 'is-current' : '') : isMinistry ? (ministrySection === (target?.replace('ministry-', '') as MinistrySection) ? 'is-current' : '') : (view === id ? 'is-current' : '')}`} onClick={() => isCoach ? selectCoachSection(target) : isMedical ? selectMedicalSection(target) : isMinistry ? selectMinistrySection(target) : go(id)}>
                     <Icon size={20} weight={view === id ? 'fill' : 'regular'} /><span>{label}</span>
                   </button>
                 ))}
@@ -259,30 +265,37 @@ function HomeView({ onFeature, onNavigate }: { onFeature: (feature: keyof typeof
 
 function MinistryView({ section, onInfo }: { section: MinistrySection; onInfo: () => void }) {
   const isVisible = (target: MinistrySection) => section === target ? '' : ' ministry-section-hidden'
+  const iconMap: Record<string, React.ReactNode> = { Pulse: <Pulse />, CirclesFour: <CirclesFour />, Activity: <Activity />, ClipboardText: <ClipboardText /> }
   return <>
-    <PageHeader eyebrow="NATIONAL OVERSIGHT" title="The sports system, in view." description="A governed national picture of athletes, federations, performance activity, and delivery progress." onInfo={onInfo} />
-    <div id="ministry-overview" className={`ministry-hero${isVisible('overview')}`}><div><span className="card-label">PROGRAMME HEALTH</span><h2>On track for the next gate</h2><p>Registry, federation rollout, and data governance are moving together.</p></div><div className="ministry-hero-score"><strong>76%</strong><span>delivery confidence</span></div></div>
-    <div className={`ministry-kpis${isVisible('overview')}`}><MinistryKpi label="Athletes registered" value={`${registry.athletesRegistered}+`} trend="+18% this quarter" icon={<Pulse />} /><MinistryKpi label="Federations active" value={`${registry.federationsActive}`} trend="1 onboarding" icon={<CirclesFour />} /><MinistryKpi label="Matches digitized" value={`${registry.matchesDigitized}+`} trend="+64 this month" icon={<Activity />} /><MinistryKpi label="Personnel trained" value={`${registry.personnelTrained}+`} trend="Across 5 federations" icon={<ClipboardText />} /></div>
-    <div className="ministry-card" style={{ marginTop: 12 }}><div className="panel-title"><div><span className="eyebrow">COHORT INTELLIGENCE</span><h2>Governed view — {athleticx.cohortIntelligence.pilot} records</h2></div><span className="card-label">Isonga</span></div><p className="panel-intro">Girls {athleticx.cohortIntelligence.girls} · Boys {athleticx.cohortIntelligence.boys} · 5 provinces · 8 disciplines · Train to Train {athleticx.cohortIntelligence.trainToTrain} largest cohort · Consent {athleticx.cohortIntelligence.coverage[0].value} · Injury surveillance {athleticx.cohortIntelligence.coverage[4].value}</p><div className="registry-summary"><div><span>Current consent</span><strong>{athleticx.cohortIntelligence.consent.current}</strong></div><div><span>Renewal attention</span><strong>{athleticx.cohortIntelligence.consent.renewal}</strong></div><div><span>Missing</span><strong>{athleticx.cohortIntelligence.consent.missing}</strong></div></div></div>
-    <div className={`ministry-grid ministry-grid-${section}`}>
-      <section id="ministry-coverage" className={`ministry-section${isVisible('coverage')}`}>
-        <div className="ministry-card"><div className="panel-title"><div><span className="eyebrow">FEDERATION COVERAGE</span><h2>Where delivery is moving</h2></div><button className="icon-button" onClick={onInfo} aria-label="Explain federation coverage"><Info size={18} /></button></div><p className="panel-intro">Coverage measures verified onboarding, active data flow, and trained federation personnel.</p>{federations.map((item, index) => <FederationRow key={item.name} name={item.name} detail={`${item.sport} · ${item.phase}`} value={`${item.coverage}%`} color={index === 0 ? 'high' : index === federations.length - 1 ? 'low' : 'mid'} />)}<div className="coverage-legend"><span><i className="dot dot-mint" /> On track</span><span><i className="dot dot-muted" /> Needs onboarding</span></div><button className="outline-button">Open federation view <ArrowUpRight size={16} /></button></div>
-        <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">DELIVERY SNAPSHOT</span><h3>What the percentage means</h3></div><div className="coverage-detail-grid"><DetailStat label="Active data flows" value="18" detail="Across 5 federations" /><DetailStat label="Onboarding complete" value="3 / 5" detail="Two in rollout" /><DetailStat label="Trained personnel" value="100+" detail="Coaches and medics" /></div></div>
-        <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">ROLLOUT GATES</span><h3>How federations move forward</h3></div><div className="rollout-steps"><RolloutStep number="01" title="Mandate and data agreement" status="Complete" /><RolloutStep number="02" title="Registry and passport setup" status="In progress" /><RolloutStep number="03" title="Performance pipeline activation" status="Next gate" /></div></div>
-      </section>
-      <section id="ministry-governance" className={`ministry-section${isVisible('governance')}`}>
-        <div className="ministry-card"><div className="panel-title"><div><span className="eyebrow">DATA GOVERNANCE</span><h2>Trust status</h2></div><LockKey size={20} color="var(--mint)" /></div><div className="governance-status"><ShieldCheck size={26} weight="fill" /><div><strong>Protected and in-country</strong><p>HORAS Labs · Rwanda</p></div></div><div className="governance-list"><GovernanceItem label="Data residency" value="Compliant" /><GovernanceItem label="Access events" value="0 unresolved" /><GovernanceItem label="DPO review" value="Current" /></div><div className="audit-preview"><span className="eyebrow">LATEST CONTROL</span><strong>Medical record access is restricted</strong><p>Only authorized medical staff can view individual clinical details.</p></div></div>
-        <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">ACCESS MODEL</span><h3>Who can see what</h3></div><div className="governance-detail-grid"><AccessTier title="Athlete" access="Own record" detail="Passport, wellness, self-report" /><AccessTier title="Medical staff" access="Full clinical" detail="Verified care and injury details" /><AccessTier title="Ministry" access="Aggregate only" detail="No individual medical records" /></div></div>
-        <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">AUDIT TRAIL</span><h3>Recent controls</h3></div><div className="audit-list"><AuditEvent time="Today · 09:14" title="DPO review completed" detail="No unresolved findings" /><AuditEvent time="Yesterday · 16:42" title="HORAS backup verified" detail="In-country recovery point confirmed" /><AuditEvent time="12 May 2026" title="RISA pathway updated" detail="Technical review record attached" /></div><button className="link-button">View governance log <CaretRight size={15} /></button></div>
-      </section>
-    </div>
-    <section id="ministry-registry" className={`ministry-section registry-section${isVisible('registry')}`}>
-      <div className="ministry-card"><div className="panel-title"><div><span className="eyebrow">REGISTRY PULSE</span><h2>National athlete record</h2></div><button className="link-button">Open registry <ArrowUpRight size={15} /></button></div><p className="panel-intro">The registry is the national source of truth for who an athlete is, where they compete, and whether their record is eligible and governed.</p><div className="registry-summary"><div><span>Unique athlete IDs</span><strong>2,500+</strong></div><div><span>Duplicate records resolved</span><strong>38</strong></div><div><span>Records updated this week</span><strong>214</strong></div></div></div>
-      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">FIND A RECORD</span><h3>Search and filter</h3></div><div className="registry-toolbar"><span className="registry-search"><Pulse size={16} /><input aria-label="Search athlete registry" placeholder="Search athlete, club, or ID" /></span><button className="registry-filter">All federations <CaretRight size={14} /></button><button className="registry-filter">Status: Any <CaretRight size={14} /></button></div></div>
-      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">RECORD LIFECYCLE</span><h3>From capture to national use</h3></div><div className="registry-lifecycle"><RegistryStage label="Capture" detail="Profile created" active /><RegistryStage label="Verify" detail="Identity checked" active /><RegistryStage label="Govern" detail="Consent recorded" active /><RegistryStage label="Activate" detail="Ready for use" /></div></div>
-      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">FEDERATION RECORDS</span><h3>Registration by programme</h3></div><div className="registry-table"><div className="registry-row table-head"><span>Federation</span><span>Registered</span><span>Eligibility</span><span>Change</span></div><RegistryRow name="FERWAFA" sport="Football" count="1,420" status="98% cleared" change="124" /><RegistryRow name="Rwanda Athletics" sport="Track & field" count="486" status="94% cleared" change="52" /><RegistryRow name="Rwanda Volleyball" sport="Volleyball" count="318" status="91% cleared" change="38" /><RegistryRow name="Other federations" sport="4 programmes" count="276" status="88% cleared" change="19" /></div></div>
+    <PageHeader eyebrow={ministry.persona.eyebrow} title={ministry.persona.title} description={ministry.persona.description} onInfo={onInfo} />
+    <section id="ministry-overview" className={`ministry-section${isVisible('overview')}`}>
+      <div className="ministry-hero" style={{ gridColumn: '1 / -1' }}><div><span className="card-label">{ministry.overview.heroLabel}</span><h2>{ministry.overview.heroTitle}</h2><p>{ministry.overview.heroText}</p></div><div className="ministry-hero-score"><strong>{ministry.overview.heroScore}</strong><span>{ministry.overview.heroScoreDetail}</span></div></div>
+      <div className="ministry-kpis" style={{ gridColumn: '1 / -1' }}>{ministry.overview.kpis.map((item) => <MinistryKpi key={item.label} label={item.label} value={item.value} trend={item.trend} icon={iconMap[item.icon]} />)}</div>
+      <div className="ministry-card" style={{ gridColumn: '1 / -1' }}><div className="panel-title"><div><span className="eyebrow">COHORT INTELLIGENCE</span><h2>{ministry.cohort.title}</h2></div><span className="card-label">{ministry.cohort.tag}</span></div><p className="panel-intro">{ministry.cohort.intro}</p><div className="registry-summary">{ministry.cohort.summary.map((item) => <div key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div></div>
+      <div className="ministry-card" style={{ gridColumn: '1 / -1' }}><div className="card-section-heading"><span className="eyebrow">DELIVERY CONFIDENCE</span><h3>What the pilot shows</h3></div><div className="coverage-detail-grid">{ministry.cohort.breakdown.map((item) => <DetailStat key={item.label} label={item.label} value={item.value} detail={item.detail} />)}</div><div className="coverage-legend"><span><i className="dot dot-mint" /> {ministry.cohort.stageHighlight.stage} · {ministry.cohort.stageHighlight.count} students</span><span><i className="dot dot-muted" /> {ministry.cohort.stageHighlight.note}</span></div></div>
     </section>
-    <div className={`ministry-footnote${section === 'overview' ? '' : ' ministry-section-hidden'}`}><Info size={16} /><span>National view uses aggregate and pseudonymized data. Individual medical records remain restricted to authorized medical staff.</span></div>
+    <section id="ministry-cohort" className={`ministry-section${isVisible('cohort')}`}>
+      <div className="ministry-card"><div className="panel-title"><div><span className="eyebrow">COHORT INTELLIGENCE</span><h2>Governed view — {ministry.cohort.title}</h2></div><span className="card-label">De-identified</span></div><p className="panel-intro">{ministry.cohort.intro}</p><div className="coverage-detail-grid">{ministry.cohort.breakdown.map((item) => <DetailStat key={item.label} label={item.label} value={item.value} detail={item.detail} />)}</div><div className="coverage-legend"><span><i className="dot dot-mint" /> Largest cohort: {ministry.cohort.stageHighlight.stage} · {ministry.cohort.stageHighlight.count}</span></div></div>
+      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">RECORD COVERAGE</span><h3>Where the evidence base is strongest</h3></div>{ministry.cohort.coverage.map((item, index) => <FederationRow key={item.label} name={item.label} detail="" value={item.value} color={index === 0 ? 'high' : index === ministry.cohort.coverage.length - 1 ? 'low' : 'mid'} />)}<div className="coverage-legend"><span><i className="dot dot-mint" /> On track</span><span><i className="dot dot-muted" /> Building</span></div></div>
+      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">CONSENT STATUS</span><h3>Guardian consent at a glance</h3></div><div className="governance-list">{ministry.cohort.summary.map((item) => <GovernanceItem key={item.label} label={item.label} value={item.value} />)}</div><div className="audit-preview"><span className="eyebrow">CONSENT POLICY</span><strong>Policy v1.0 · 15 Aug 2026</strong><p>Renewal windows tracked; collection holds when consent lapses.</p></div></div>
+    </section>
+    <section id="ministry-registry" className={`ministry-section registry-section${isVisible('registry')}`}>
+      <div className="ministry-card"><div className="panel-title"><div><span className="eyebrow">REGISTRY PULSE</span><h2>{ministry.registry.pulseTitle}</h2></div><button className="link-button">Open registry <ArrowUpRight size={15} /></button></div><p className="panel-intro">{ministry.registry.intro}</p><div className="registry-summary">{ministry.registry.summary.map((item) => <div key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div></div>
+      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">FIND A RECORD</span><h3>Search and filter</h3></div><div className="registry-toolbar"><span className="registry-search"><Pulse size={16} /><input aria-label="Search student registry" placeholder={ministry.registry.searchPlaceholder} /></span><button className="registry-filter">All centres <CaretRight size={14} /></button><button className="registry-filter">Status: Any <CaretRight size={14} /></button></div></div>
+      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">RECORD LIFECYCLE</span><h3>From capture to use</h3></div><div className="registry-lifecycle">{ministry.registry.lifecycle.map((item, index) => <RegistryStage key={item.label} label={item.label} detail={item.detail} active={index < 3} />)}</div></div>
+      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">CENTRE RECORDS</span><h3>{ministry.registry.tableTitle}</h3></div><div className="registry-table"><div className="registry-row table-head">{ministry.registry.tableHead.map((head) => <span key={head}>{head}</span>)}</div>{ministry.registry.rows.map((item) => <RegistryRow key={item.name} name={item.name} sport={item.sport} count={item.count} status={item.status} change={item.change} />)}</div></div>
+    </section>
+    <section id="ministry-coverage" className={`ministry-section${isVisible('coverage')}`}>
+      <div className="ministry-card"><div className="panel-title"><div><span className="eyebrow">CENTRE COVERAGE</span><h2>{ministry.coverage.title}</h2></div><button className="icon-button" onClick={onInfo} aria-label="Explain centre coverage"><Info size={18} /></button></div><p className="panel-intro">{ministry.coverage.intro}</p>{ministry.coverage.centres.map((item) => <FederationRow key={item.name} name={item.name} detail={item.detail} value={`${item.coverage}%`} color={item.status} />)}<div className="coverage-legend"><span><i className="dot dot-mint" /> On track</span><span><i className="dot dot-muted" /> Needs onboarding</span></div></div>
+      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">DELIVERY SNAPSHOT</span><h3>What the percentage means</h3></div><div className="coverage-detail-grid">{ministry.coverage.snapshot.map((item) => <DetailStat key={item.label} label={item.label} value={item.value} detail={item.detail} />)}</div></div>
+      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">ROLLOUT GATES</span><h3>How centres move forward</h3></div><div className="rollout-steps">{ministry.coverage.gates.map((item) => <RolloutStep key={item.number} number={item.number} title={item.title} status={item.status} />)}</div></div>
+    </section>
+    <section id="ministry-governance" className={`ministry-section${isVisible('governance')}`}>
+      <div className="ministry-card"><div className="panel-title"><div><span className="eyebrow">DATA GOVERNANCE</span><h2>{ministry.governance.title}</h2></div><LockKey size={20} color="var(--mint)" /></div><div className="governance-status"><ShieldCheck size={26} weight="fill" /><div><strong>{ministry.governance.statusTitle}</strong><p>{ministry.governance.statusDetail}</p></div></div><div className="governance-list">{ministry.governance.list.map((item) => <GovernanceItem key={item.label} label={item.label} value={item.value} />)}</div><div className="audit-preview"><span className="eyebrow">{ministry.governance.previewEyebrow}</span><strong>{ministry.governance.previewTitle}</strong><p>{ministry.governance.previewDetail}</p></div></div>
+      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">ACCESS MODEL</span><h3>Who can see what</h3></div><div className="governance-detail-grid">{ministry.governance.access.map((item) => <AccessTier key={item.title} title={item.title} access={item.access} detail={item.detail} />)}</div></div>
+      <div className="ministry-card"><div className="card-section-heading"><span className="eyebrow">AUDIT TRAIL</span><h3>Recent controls</h3></div><div className="audit-list">{ministry.governance.audit.map((item) => <AuditEvent key={item.title} time={item.time} title={item.title} detail={item.detail} />)}</div><button className="link-button">View governance log <CaretRight size={15} /></button></div>
+    </section>
+    <div className={`ministry-footnote${section === 'overview' ? '' : ' ministry-section-hidden'}`}><Info size={16} /><span>This view uses aggregate and pseudonymized data. Individual medical records remain restricted to authorized medical staff.</span></div>
   </>
 }
 
@@ -356,28 +369,31 @@ function CoachView({ section }: { section: CoachSection }) {
 
 function MedicalView({ section }: { section: MedicalSection }) {
   const isVisible = (target: MedicalSection) => section === target ? '' : ' medical-section-hidden'
+  const ov = medical.overview
   return <>
-    <PageHeader eyebrow="MEDICAL STAFF · AS KIGALI U20" title="Protect the athlete before the injury." description="A clinical workspace for screening, injury surveillance, rehabilitation, and return-to-play decisions." />
+    <PageHeader eyebrow={ov.eyebrow} title={ov.title} description={ov.description} />
     <div className="medical-grid">
       <section id="medical-overview" className={`medical-section${isVisible('overview')}`}>
-        <div className="medical-hero"><div><span className="card-label">CLINICAL WORKLOAD</span><h2>4 players need medical attention today.</h2><p>Prioritize the cases that affect training, selection, and safe return to play.</p></div><div className="medical-hero-count"><strong>4</strong><span>active reviews</span></div></div>
-        <div className="medical-kpis"><MedicalKpi label="Active cases" value="4" detail="2 new this week" tone="coral" /><MedicalKpi label="In rehabilitation" value="3" detail="1 near clearance" tone="violet" /><MedicalKpi label="Cleared today" value="6" detail="No restrictions" tone="mint" /><MedicalKpi label="Screening due" value="8" detail="Next 14 days" tone="neutral" /></div>
-        <div className="medical-overview-grid"><MedicalInsight title="Immediate review" detail="Jean P. has elevated workload and a reported hamstring concern." action="Open case" tone="coral" /><MedicalInsight title="Rehabilitation progress" detail="Patrick K. completed the current strength and mobility block." action="View rehab" tone="violet" /><MedicalInsight title="Screening programme" detail="Eight athletes are due for repeat movement and growth checks." action="Open schedule" tone="mint" /></div>
+        <div className="medical-hero"><div><span className="card-label">{ov.heroLabel}</span><h2>{ov.heroTitle}</h2><p>{ov.heroText}</p></div><div className="medical-hero-count"><strong>{ov.heroCount}</strong><span>{ov.heroCountLabel}</span></div></div>
+        <div className="medical-kpis">{ov.kpis.map((item) => <MedicalKpi key={item.label} label={item.label} value={item.value} detail={item.detail} tone={item.tone} />)}</div>
+        <div className="medical-overview-grid">{ov.insights.map((item) => <MedicalInsight key={item.title} title={item.title} detail={item.detail} action={item.action} tone={item.tone} />)}</div>
       </section>
       <section id="medical-cases" className={`medical-section${isVisible('cases')}`}>
-        <div className="medical-card"><div className="panel-title"><div><span className="eyebrow">INJURY SURVEILLANCE</span><h2>Active cases</h2></div><span className="verified-pill"><Check size={13} /> Protected</span></div><p className="panel-intro">Clinical cases are visible only to authorized medical staff and are separated from coach and Ministry views.</p><div className="medical-toolbar"><span className="registry-search"><Pulse size={16} /><input aria-label="Search medical cases" placeholder="Search athlete or body region" /></span><button className="registry-filter">All statuses <CaretRight size={14} /></button></div></div>
-        <div className="medical-card"><div className="card-section-heading"><span className="eyebrow">OPEN CASES</span><h3>Priority review queue</h3></div><MedicalCase name="Jean P." club="APR FC · Midfielder" region="Hamstring" mechanism="Overuse" status="Review today" tone="coral" /><MedicalCase name="Eric M." club="AS Kigali · Right-back" region="Right knee" mechanism="Training load" status="Monitoring" tone="violet" /><MedicalCase name="Patrick K." club="Police FC · Goalkeeper" region="Ankle" mechanism="Contact" status="Rehab" tone="mint" /><MedicalCase name="Samuel N." club="Rayon Sports · Forward" region="Calf" mechanism="Unknown" status="Awaiting exam" tone="muted" /></div>
-        <div className="medical-card"><div className="card-section-heading"><span className="eyebrow">CASE DATA</span><h3>What gets recorded</h3></div><div className="clinical-data-grid"><ClinicalData label="Incidence" value="4" detail="New cases this month" /><ClinicalData label="Days lost" value="18" detail="Across active cases" /><ClinicalData label="Recurrence" value="1" detail="Needs follow-up" /><ClinicalData label="Top region" value="Knee" detail="32% of reports" /></div></div>
+        <div className="medical-card"><div className="panel-title"><div><span className="eyebrow">{medical.cases.eyebrow}</span><h2>{medical.cases.title}</h2></div><span className="verified-pill"><Check size={13} /> Protected</span></div><p className="panel-intro">{medical.cases.intro}</p><div className="medical-toolbar"><span className="registry-search"><Pulse size={16} /><input aria-label="Search medical cases" placeholder={medical.cases.searchPlaceholder} /></span><button className="registry-filter">All statuses <CaretRight size={14} /></button></div></div>
+        <div className="medical-card" style={{ gridColumn: '1 / -1' }}><div className="card-section-heading"><span className="eyebrow">OPEN CASES</span><h3>Priority review queue</h3></div>{medical.cases.list.map((item) => <MedicalCase key={item.name} name={item.name} club={item.club} region={item.region} mechanism={item.mechanism} status={item.status} tone={item.tone} />)}</div>
+        <div className="medical-card" style={{ gridColumn: '1 / -1' }}><div className="panel-title"><div><span className="eyebrow">{medical.cases.featured.eyebrow}</span><h2>{medical.cases.featured.title}</h2></div><span className="verified-pill"><Check size={13} /> {medical.cases.featured.status}</span></div><p className="panel-intro" style={{ marginTop: 6, color: 'var(--muted)', fontSize: '11px' }}>{medical.cases.featured.meta}</p><div className="case-detail"><div className="case-detail-anatomy"><div className="body-map-stage"><BodyMap selected={medical.cases.featured.bodyPart} onSelect={() => {}} /><div className="body-map-legend"><span><i className="dot dot-coral" /> Self-reported</span><span><i className="dot dot-mint" /> Reviewed</span></div></div></div><div className="case-detail-body"><p className="case-report">{medical.cases.featured.report}</p><div className="case-signals">{medical.cases.featured.signals.map((item) => <div className="clinical-data" key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}</div></div></div><div className="case-next"><span className="eyebrow">NEXT ACTIONS</span>{medical.cases.featured.next.map((item) => <MedicalAction key={item.title} title={item.title} detail={item.detail} />)}</div></div>
+        <div className="medical-card" style={{ gridColumn: '1 / -1' }}><div className="card-section-heading"><span className="eyebrow">CASE DATA</span><h3>What gets recorded</h3></div><div className="clinical-data-grid">{medical.cases.data.map((item) => <ClinicalData key={item.label} label={item.label} value={item.value} detail={item.detail} />)}</div></div>
       </section>
       <section id="medical-rehab" className={`medical-section${isVisible('rehab')}`}>
-        <div className="medical-card"><div className="panel-title"><div><span className="eyebrow">REHABILITATION</span><h2>Progress without guesswork</h2></div><span className="card-label">3 ACTIVE</span></div><p className="panel-intro">Track treatment milestones, functional tests, and the evidence required before clearance.</p><RehabRow name="Patrick K." injury="Ankle sprain" progress="82%" next="Single-leg stability" tone="mint" /><RehabRow name="Eric M." injury="Right knee monitoring" progress="64%" next="Repeat Y Balance" tone="violet" /><RehabRow name="Jean P." injury="Hamstring concern" progress="28%" next="Clinical assessment" tone="coral" /></div>
-        <div className="medical-card"><div className="card-section-heading"><span className="eyebrow">FUNCTIONAL TESTS</span><h3>Latest assessment results</h3></div><ClinicalTest name="FMS composite" score="15 / 21" result="Acceptable" /><ClinicalTest name="Y Balance asymmetry" score="3.2 cm" result="Within target" /><ClinicalTest name="Countermovement jump" score="36 cm" result="Baseline stable" /><ClinicalTest name="Resting heart rate" score="62 bpm" result="At baseline" /></div>
-        <div className="medical-card"><div className="card-section-heading"><span className="eyebrow">CARE PLAN</span><h3>Next clinical actions</h3></div><MedicalAction title="Repeat functional screen" detail="Eric M. · Before next selection review" /><MedicalAction title="Update rehabilitation plan" detail="Patrick K. · After stability test" /><MedicalAction title="Schedule DPO-safe case review" detail="Jean P. · Today at 15:00" /></div>
+        <div className="medical-card" style={{ gridColumn: '1 / -1' }}><div className="panel-title"><div><span className="eyebrow">{medical.rehab.eyebrow}</span><h2>{medical.rehab.title}</h2></div><span className="card-label">{medical.rehab.pill}</span></div><p className="panel-intro">{medical.rehab.intro}</p>{medical.rehab.list.map((item) => <RehabRow key={item.name} name={item.name} injury={item.injury} progress={item.progress} next={item.next} tone={item.tone} />)}</div>
+        <div className="medical-card" style={{ gridColumn: '1 / -1' }}><div className="card-section-heading"><span className="eyebrow">{medical.rehab.tests.eyebrow}</span><h3>{medical.rehab.tests.title}</h3></div><div className="clinical-test-grid">{medical.rehab.tests.items.map((item) => <ClinicalTest key={item.student} student={item.student} name={item.name} score={item.score} result={item.result} />)}</div></div>
+        <div className="medical-card" style={{ gridColumn: '1 / -1' }}><div className="card-section-heading"><span className="eyebrow">{medical.rehab.plan.eyebrow}</span><h3>{medical.rehab.plan.title}</h3></div>{medical.rehab.plan.items.map((item) => <MedicalAction key={item.title} title={item.title} detail={item.detail} />)}</div>
       </section>
       <section id="medical-clearance" className={`medical-section${isVisible('clearance')}`}>
-        <div className="medical-card clearance-hero"><div><span className="eyebrow">RETURN TO PLAY</span><h2>Clearance decisions need evidence.</h2><p>Review medical status, functional test results, and workload context before a player returns to competition.</p></div><ShieldCheck size={35} color="var(--mint)" /></div>
-        <div className="clearance-grid"><ClearanceCard name="Eric M." status="Monitoring" detail="Clear for normal training" tone="violet" /><ClearanceCard name="Patrick K." status="Conditional" detail="Clear after stability test" tone="mint" /><ClearanceCard name="Jean P." status="Hold" detail="Clinical review required" tone="coral" /></div>
-        <div className="medical-card"><div className="card-section-heading"><span className="eyebrow">CLEARANCE QUEUE</span><h3>Decisions awaiting sign-off</h3></div><ClearanceRow name="Patrick K." decision="Conditional clearance" evidence="Rehab 82% · stability test pending" /><ClearanceRow name="Jean P." decision="Hold from high intensity" evidence="Hamstring concern · clinical exam pending" /><ClearanceRow name="Eric M." decision="Normal training" evidence="Readiness 82 · load within range" /></div>
+        <div className="medical-card clearance-hero" style={{ gridColumn: '1 / -1' }}><div><span className="eyebrow">{medical.clearance.heroEyebrow}</span><h2>{medical.clearance.heroTitle}</h2><p>{medical.clearance.heroText}</p></div><ShieldCheck size={35} color="var(--mint)" /></div>
+        <div className="clearance-grid" style={{ gridColumn: '1 / -1' }}>{medical.clearance.cards.map((item) => <ClearanceCard key={item.name} name={item.name} status={item.status} detail={item.detail} tone={item.tone} />)}</div>
+        <div className="medical-card" style={{ gridColumn: '1 / -1' }}><div className="card-section-heading"><span className="eyebrow">{medical.clearance.queueEyebrow}</span><h3>{medical.clearance.queueTitle}</h3></div>{medical.clearance.queue.map((item) => <ClearanceRow key={item.name} name={item.name} decision={item.decision} evidence={item.evidence} />)}</div>
+        <div className="medical-card" style={{ gridColumn: '1 / -1' }}><div className="panel-title"><div><span className="eyebrow">{medical.clearance.featured.eyebrow}</span><h2>{medical.clearance.featured.title}</h2></div><span className="verified-pill"><Check size={13} /> {medical.clearance.featured.status}</span></div><p className="panel-intro" style={{ marginTop: 6, color: 'var(--muted)', fontSize: '11px' }}>{medical.clearance.featured.meta}</p><p className="case-report" style={{ marginTop: 14 }}>{medical.clearance.featured.intro}</p><div className="clearance-process">{medical.clearance.featured.process.map((item) => <div className={`clearance-step ${item.tone}`} key={item.number}><span className="step-nb">{item.number}</span><div className="step-body"><strong>{item.title}</strong><small>{item.detail}</small></div><em>{item.status}</em></div>)}</div><div className="clearance-comments"><span className="eyebrow">REVIEW COMMENTS</span>{medical.clearance.featured.comments.map((item) => <div className="clearance-comment" key={item.when}><div className="comment-head"><strong>{item.by}</strong><small>{item.when}</small></div><p>{item.text}</p></div>)}</div></div>
       </section>
     </div>
   </>
@@ -388,7 +404,7 @@ function MedicalInsight({ title, detail, action, tone }: { title: string; detail
 function MedicalCase({ name, club, region, mechanism, status, tone }: { name: string; club: string; region: string; mechanism: string; status: string; tone: string }) { return <div className="medical-case"><div><strong>{name}</strong><span>{club}</span></div><div><b>{region}</b><small>{mechanism}</small></div><em className={tone}>{status}</em><CaretRight size={15} /></div> }
 function ClinicalData({ label, value, detail }: { label: string; value: string; detail: string }) { return <div className="clinical-data"><span>{label}</span><strong>{value}</strong><small>{detail}</small></div> }
 function RehabRow({ name, injury, progress, next, tone }: { name: string; injury: string; progress: string; next: string; tone: string }) { return <div className="rehab-row"><div><strong>{name}</strong><span>{injury}</span></div><div className="progress-track"><span className={tone} style={{ width: progress }} /></div><b>{progress}</b><small>{next}</small></div> }
-function ClinicalTest({ name, score, result }: { name: string; score: string; result: string }) { return <div className="clinical-test"><div><strong>{name}</strong><small>{result}</small></div><b>{score}</b></div> }
+function ClinicalTest({ student, name, score, result }: { student?: string; name: string; score: string; result: string }) { return <div className="clinical-test"><div><strong>{student ? `${student} · ${name}` : name}</strong><small>{result}</small></div><b>{score}</b></div> }
 function MedicalAction({ title, detail }: { title: string; detail: string }) { return <div className="medical-action"><span><Check size={14} /></span><div><strong>{title}</strong><small>{detail}</small></div></div> }
 function ClearanceCard({ name, status, detail, tone }: { name: string; status: string; detail: string; tone: string }) { return <article className={`clearance-card ${tone}`}><span>{name}</span><strong>{status}</strong><small>{detail}</small></article> }
 function ClearanceRow({ name, decision, evidence }: { name: string; decision: string; evidence: string }) { return <div className="clearance-row"><div><strong>{name}</strong><span>{decision}</span></div><small>{evidence}</small><CaretRight size={15} /></div> }
